@@ -8,6 +8,6 @@ router.post("/signup",signup);
 router.post("/login",login);
 router.post("/logout",logout);
 
-router.post("/onboarding", protectRoute, onboard)
+router.post("/onboarding", protectRoute, onboard) // protected route just see check if the user is authenticated or not
 
 export default router
