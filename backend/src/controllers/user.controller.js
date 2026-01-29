@@ -107,3 +107,36 @@ export async function acceptFriendRequest(req, res) {
         res.status(500).json({message: "Internal Service error"});
     }
 }
+
+export async function getFriendRequests(req, res){
+    try {
+        const incomingReqs = await FriendRequest.find({
+            recipient: req.user.id,
+            status: "pending",
+        }).populate("sender","fullName profilePic nativeLanguage learningLanguage");
+
+        const acceptReqs = await FriendRequest.find({
+            sender: req.user.id,
+            status: "accepted",
+        }).populate("recipient", "fullName profilePic");
+
+        res.status(200).json({incomingReqs, acceptReqs});
+    } catch (error) {
+        console.log("Error is getPendingFriendRequests controller", error.message);
+        res.status(500).json({message: "Internal service error"});
+    }
+}
+
+export async function getOutgoingFriendReqs(req, res) {
+    try {
+        const outGoingRequests = await FriendRequest.find({
+            sender: req.user.id,
+            status:"pending",
+        }).populate("recipient", "fullName profilePic nativeLanguage learningLanguage");
+
+        res.status(200).json(outGoingRequests);
+    } catch (error) {
+        console.log("Error in outGoingFriendReqs Controller", error.message);
+        res.status(500).json({message:"Internal service error"});
+    }
+}
