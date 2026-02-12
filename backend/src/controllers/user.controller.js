@@ -10,14 +10,13 @@ export async function getRecommendedUsers(req, res){
         const recommendedUsers = await User.find({
             $and: [
                 {_id: {$ne: currentUserId}},{
-                    $id: {$nin: currentUser.friends}
+                    _id: {$nin: currentUser.friends}
                 },{
                     isOnboarded:true
                 }
             ]
         })
-
-        res.status(200).json({recommendedUsers})
+        res.status(200).json(recommendedUsers)
     } catch (error) {
         console.error("Error in getRecommendedUsers controleer", error.message);
         res.status(500).json({message: "Internal Service Error"});
@@ -44,7 +43,7 @@ export async function sendFriendRequest(req, res) {
             return res.json(400).json({message:"You can't send friend request to yourself"})
         }
 
-        const recipient = await User.findById(recipient)
+        const recipient = await User.findById(recipientId)
         if(!recipient){
             return res.status(404).json({message: "Recipient data not found"});
         }
