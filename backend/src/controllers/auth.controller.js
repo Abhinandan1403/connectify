@@ -24,9 +24,10 @@ export async function signup(req,res){
             return res.status(400).json({ message: "Email already in use. Try other email" });
         }
 
-        const idx = Math.floor(Math.random()*100)+1;
+        // const idx = Math.floor(Math.random()*100)+1;
 
-        const randomAvatar = `https://avatar.iran.liara.run/public/${idx}.png`
+        // const randomAvatar = `https://avatar.iran.liara.run/public/${idx}.png`
+        const randomAvatar = `https://xsgames.co/randomusers/avatar.php?g=pixel`
 
         const newUser = await User.create({
             email,
