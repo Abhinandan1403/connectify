@@ -32,7 +32,7 @@ const CallPage = () => {
   const { data: tokenData } = useQuery({
     queryKey: ["streamToken"],
     queryFn: getStreamToken,
-    enabled: !!authUser,
+    enabled: !!authUser, //bool
   });
 
   useEffect(() => {
