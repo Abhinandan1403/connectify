@@ -15,8 +15,8 @@ app.use(cors({
     credentials:true //allow frontend to send the cookies
 }));
 
-app.use(express.json());
-app.use(cookieParser());
+app.use(express.json());//string to json hence req.body
+app.use(cookieParser());//string to json cookie to access req.cookie
 
 // app.get("/api/auth/signup",(req,res)=>{
 //     res.send("Signup Route");
